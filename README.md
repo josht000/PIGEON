@@ -45,3 +45,13 @@ Script to download auxiliary data used in this project.
 ### ```run.py```
 
 This file is the entry point to this project, loads and preprocesses the data, and depending on the command pretrains, finetunes, embeds, or evaluate data.
+
+
+## conda setup
+
+```
+conda env update --file env.yml
+
+# Updating env 
+conda env update --file env.yml --prune
+```

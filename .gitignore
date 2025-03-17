@@ -18,3 +18,4 @@ serving/static/
 .tensorboard-info/*
 .vscode/*
 *.arrow
+data/osv-mini-129k/osv5m/

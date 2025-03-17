@@ -10,7 +10,7 @@ from dataset_creation.benchmark import BenchmarkDataset
 from preprocessing import preprocess
 from evaluation import evaluate
 from datasets import DatasetDict, concatenate_datasets
-from models import VITEmbedding, CLIPEmbedding
+from models import CLIPEmbedding
 from config import *
 
 logger = logging.getLogger('run')
@@ -93,7 +93,7 @@ argp.add_argument('--landmarks',
 )
 
 def main():
-
+ 
     # Setup
     args = argp.parse_args()
     mode = 'classification' if args.classification else 'regression'
@@ -129,7 +129,7 @@ def main():
                 embedder = CLIPEmbedding(args.name, load_checkpoint=True, panorama=(not args.yfcc))
             else:
                 print('Using ViT embedder.')
-                embedder = VITEmbedding(args.named)
+                # embedder = VITEmbedding(args.named)
 
         # Preprocess
         geocells = GEOCELL_PATH_YFCC if args.yfcc else GEOCELL_PATH

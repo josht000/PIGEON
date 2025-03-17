@@ -1,7 +1,11 @@
 # Downloads data needed for data augmentation and training on auxiliary data.
 
 # Political boundaries
-curl --create-dirs -O --output-dir data/geocells https://github.com/wmgeolab/geoBoundaries/raw/main/releaseData/CGAZ/geoBoundariesCGAZ_ADM2.geojson
+# curl --create-dirs -O --output-dir data/geocells https://github.com/wmgeolab/geoBoundaries/raw/main/releaseData/CGAZ/geoBoundariesCGAZ_ADM2.geojson
+mkdir -p data/geocells
+wget https://github.com/wmgeolab/geoBoundaries/raw/main/releaseData/CGAZ/geoBoundariesCGAZ_ADM2.geojson -O data/geocells/geoBoundariesCGAZ_ADM2.geojson
+wget https://github.com/wmgeolab/geoBoundaries/raw/main/releaseData/CGAZ/geoBoundariesCGAZ_ADM1.geojson -O data/geocells/geoBoundariesCGAZ_ADM1.geojson
+wget https://github.com/wmgeolab/geoBoundaries/raw/main/releaseData/CGAZ/geoBoundariesCGAZ_ADM0.geojson -O data/geocells/countries.geojson
 
 # GADM Country Area Data
 curl --create-dirs -O --output-dir data/gadm https://geodata.ucdavis.edu/gadm/gadm4.1/gadm_410-levels.zip
