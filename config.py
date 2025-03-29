@@ -4,6 +4,8 @@ from transformers import TrainingArguments
 
 # OpenAI's pretrained implementation
 CLIP_MODEL = 'openai/clip-vit-large-patch14-336'
+BASE_CLIP_MODEL = 'openai/clip-vit-base-patch32'
+STREETVIEW_CLIP_MODEL = 'geolocal/StreetCLIP' # large/14, 336 pixel side length
 CLIP_EMBED_DIM = 1024
 
 ### StreetView
@@ -19,6 +21,11 @@ PRETRAIN_METADATA_PATH_YFCC = 'data/osv-mini-129k/osv5m/train_mini.csv'
 # METADATA_PATH_YFCC = 'data/data_yfcc_augmented_non_contaminated.csv'
 # PRETRAIN_METADATA_PATH_YFCC = 'data/data_yfcc_augmented_non_contaminated.csv'
 IMAGE_PATH_YFCC = 'data/osv-mini-129k/osv5m/train_images'
+
+### OSV-Mini-129k
+METADATA_PATH_OSV_MINI_129K = 'data/osv-mini-129k/osv5m/train_mini.csv'
+PRETRAIN_METADATA_PATH_OSV_MINI_129K = 'data/osv-mini-129k/osv5m/train_mini.csv'
+IMAGE_PATH_OSV_MINI_129K = 'data/osv-mini-129k/osv5m/train_images'
 
 ### Landmarks
 METADATA_PATH_LANDMARKS = 'data/data_landmarks_aug.csv'

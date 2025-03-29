@@ -78,8 +78,7 @@ def _thumbnail(img: PIL.Image, size: int) -> PIL.Image:
         return img.resize((ow, oh), PIL.Image.BILINEAR)
 
 
-def flickr_download(x, size_suffix="z", min_edge_size=None):
-
+def flickr_download(x, size_suffix="z", min_edge_size=None, max_retries=5, initial_delay=60):
     # prevent downloading in full resolution using size_suffix
     # https://www.flickr.com/services/api/misc.urls.html
 
@@ -93,19 +92,26 @@ def flickr_download(x, size_suffix="z", min_edge_size=None):
     else:
         url = url_original
 
-    r = requests.get(url)
-    if r:
-        try:
-            image = PIL.Image.open(BytesIO(r.content))
-        except PIL.UnidentifiedImageError as e:
-            logger.error(f"{image_id} : {url}: {e}")
-            return
-    elif r.status_code == 129:
-        time.sleep(60)
-        logger.warning("To many requests, sleep for 60s...")
-        flickr_download(x, min_edge_size=min_edge_size, size_suffix=size_suffix)
-    else:
-        logger.error(f"{image_id} : {url}: {r.status_code}")
+    for attempt in range(max_retries):
+        r = requests.get(url)
+        if r.status_code == 200:
+            try:
+                image = PIL.Image.open(BytesIO(r.content))
+                break
+            except PIL.UnidentifiedImageError as e:
+                logger.error(f"{image_id} : {url}: {e}")
+                return
+        elif r.status_code == 429 or r.status_code == 129:  # Handle both rate limit codes
+            delay = initial_delay * (2 ** attempt)  # Exponential backoff
+            logger.warning(f"Rate limited (attempt {attempt + 1}/{max_retries}). Sleeping for {delay}s...")
+            time.sleep(delay)
+            continue
+        else:
+            logger.error(f"{image_id} : {url}: {r.status_code}")
+            return None
+    
+    if attempt == max_retries - 1:
+        logger.error(f"Failed to download {image_id} after {max_retries} attempts due to rate limiting")
         return None
 
     if image.mode != "RGB":

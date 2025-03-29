@@ -86,6 +86,12 @@ argp.add_argument('--yfcc',
     default=False
 )
 
+argp.add_argument('--osv-mini-129k',
+    help='Set flag to train with osv-mini-129k instead of StreetView data. Similar to YFCC.',
+    action='store_true',
+    default=False
+)
+
 argp.add_argument('--landmarks',
     help='Set flag if landmark data was added to the training mix.',
     action='store_true',

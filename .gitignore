@@ -19,3 +19,10 @@ serving/static/
 .vscode/*
 *.arrow
 data/osv-mini-129k/osv5m/
+data/geocells/
+data/koppen_geiger/
+data/osv-mini-129k/
+data/gadm/
+data/pop_density/
+data/yfcc100m/
+

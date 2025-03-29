@@ -55,3 +55,14 @@ conda env update --file env.yml
 # Updating env 
 conda env update --file env.yml --prune
 ```
+
+## pip setup
+
+In addition the the conda setup created by the original author, I've setup the pip environment for ubuntu 22 with a bash script and frozen env to get it all going. Assumes you have Python 3.8 installed already.
+
+```
+python3.8 -m venv ~/envs/pigeon
+
+./setup.sh
+
+```
